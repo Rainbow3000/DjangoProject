@@ -1,0 +1,55 @@
+{%extends 'pages/base.html' %} {% block content %}
+
+<div class="user-login">
+  <div class="container-login">
+    <h1 class="tiltle-login">Register</h1>
+    <div class="login">
+      <form class="form-login" action="" method="post">
+        {% csrf_token %}
+        <div class="review-login">
+          <label for="uname"><b>Username</b></label>
+          {% if form.errors.username%}
+          <span style="color: red">{{form.errors.username}}</span>
+          {% endif %} {{form.username}}
+
+          <label for="psw"><b>Email</b></label>
+          {% if form.errors.email%}
+          <span style="color: red">{{form.errors.email}}</span>
+          {% endif %} {{form.email}}
+
+          <label for="psw"><b>Password</b></label>
+          {% if form.errors.password1%}
+          <span style="color: red">{{form.errors.password1}}</span>
+          {% endif %} {{form.password1}}
+
+          <label for="psw"><b>Re-Password</b></label>
+          {% if form.errors.password2%}
+          <span style="color: red">{{form.errors.password2}}</span>
+          {% endif %} {{form.password2}}
+          <a style="color: red" href="/mywebsite/login.php"
+            >Do you have a account ?</a
+          >
+
+          <button
+            style="
+              width: 200px;
+              height: 45px;
+              cursor: pointer;
+              background-color: blue;
+              color: white;
+              outline: none;
+              border: none;
+              border-radius: 5px;
+            "
+            name="submit"
+            type="submit"
+          >
+            REGISTER
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

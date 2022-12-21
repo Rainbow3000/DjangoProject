@@ -1,0 +1,115 @@
+{%extends 'pages/base.html' %} {% block content %}
+
+<style>
+    #Payment{
+      width: 1430px;
+      min-height: 500px;
+      height: auto;
+      margin: 0 auto;
+      margin-top:50px;
+  }
+  #tableP{
+      width: 1430px;
+      border-collapse: collapse;
+      text-align:center;
+  }
+  th,td{
+      padding: 20px;
+      border:1px solid rgba(128, 128, 128, 0.553)
+  }
+  table,th,tr{
+      border:1px solid rgba(128, 128, 128, 0.553)
+  }
+  #info-customer{
+      width: 100%;
+      height: auto;
+      float: left;
+      margin-top: 50px;
+  }
+  #info-customer div{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+  }
+  #info-customer div input{
+      width: 1000px;
+      height: 40px;
+      outline: none;
+      padding-left:20px;
+      border:1px solid rgba(128, 128, 128, 0.553)
+  }
+  #info-customer div input:focus{
+      border-color:orange;
+  }
+  #paymentBtn{
+      margin-left: 200px;
+      width: 120px;
+      height: 40px;
+      margin-top: 20px;
+  }
+  h1{
+      width: 1200px;
+      height:auto,
+      margin:0 auto;
+      text-align:center
+  }
+</style>
+
+<div class="payment-page" id="Payment">
+  <table id="tableP">
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+    {% for item in cart %}
+    <tr>
+      <td>
+        <img
+          width="90px"
+          height="80px"
+          src="/store/static/{{ item.product.product_image}}"
+          class="attachment-168x202 size-168x202 wp-post-image"
+          alt=""
+          loading="lazy"
+        />
+      </td>
+      <td>{{item.product.name}}</td>
+      <td><mark>${{item.product.selling_price}}</mark></td>
+      <td>{{item.product_qty}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <h3>Total Bill : $<mark>{{totalPrice}}</mark></h3>
+  <form id="info-customer" method="POST">
+     {% csrf_token %}
+    <input type="hidden" value = "{{totalPrice}}" class="total-price-cart" />
+
+    <div>
+      <label for="">Name Customer</label>
+      <input type="text" name="Name" placeholder="Your Name" class="user-name"  required />
+    </div>
+   
+    <div>
+      <label for="">Phone</label>
+      <input type="text" name="Phone" placeholder="Your Phone" class="user-phone"  required />
+    </div>
+    <div>
+      <label for="">Adress</label>
+      <input type="text" name="Add" placeholder="Your Address" class="user-address"  required />
+    </div>
+
+    <input
+      style="font-size:18px;font-weight:bold,border:1px solid rgba(128, 128, 128, 0.553);margin-bottom:5px;background-color:teal;color:white;border:none;border-radius:5px;cursor:pointer "
+      id="paymentBtn"
+      type="submit"
+      name="submit"
+      value="Order Now"
+      class= "order-btn"
+    />
+  </form>
+</div>
+
+{% endblock %}

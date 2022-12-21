@@ -1,0 +1,159 @@
+{%extends 'pages/base.html' %}
+{% block content  %}
+{% load static %} 
+<div class="details-product">
+
+{% for item in product %}
+ <div class="image-product">
+        <img id="image-details" width="480" height="480" src="{% static item.product_image %}" alt="">
+    </div>
+    <div class="info-product">
+        <div class="header-product-info">
+            <span class="name-product-detail">{{item.name}}</span>
+            <span class="info-star">
+                <li><i class="far fa-star Star-one"></i></li>
+                <li><i class="far fa-star Star-two"></i></li>
+                <li><i class="far fa-star Star-three"></i></li>
+                <li><i class="far fa-star Star-four"></i></li>
+                <li><i class="far fa-star Start-five"></i></li>(04)
+                <li class="review-info">Add your review</li>
+            </span>
+            <span class="social-info">
+                <div class="info-face">
+                    <span><i class="fab fa-facebook-f"></i> Facebook</span>
+                </div>
+                <div class="info-twitter">
+                    <span><i class="fab fa-twitter"></i> Twitter</span>
+                </div>
+                <div class="info-instagram">
+                    <span><i class="fab fa-instagram"></i> Instagram</span>
+                </div>
+            </span>
+        </div>
+        <div class="info-description">
+            <span style="font-size: 18px;
+        position: relative;
+        bottom: 10px;">{{item.description}}</span>
+        </div>
+        <div>
+            <span class="Availability">Availability : <span class="instock">Instock</span></span><br>
+            <span class="info-price"></span>
+            {% csrf_token %}
+            <input type="hidden" value="{{item.id}}" class="prod_id" />
+            <span class="info-add-cart">
+                <div class="quantity-info">
+                    <span id="view-des">-</span><span class="prod_qty" id="view-quantity">1</span><span id="view-inc">+</span>
+                </div>
+                <div id="myID-view"></div>
+                <div style="background-color:orangered;border-radius:5px;width:200px;text-align:center" class="addToCartBtn"><a style="color:white" href="#">ADD TO CART</a></div>
+                <div class="icon-info">
+                    <i class="far fa-heart"></i>
+                    <i class="fas fa-retweet"></i>
+                </div>
+            </span>
+        </div>
+    </div>
+     {% endfor %}      
+</div>
+<style>
+    .main-view-more{
+        width: 1200px;
+        height:auto;
+    }
+    #sendComment{
+        font-size:20px;
+    }
+
+    #sendComment:hover{
+        cursor: pointer;
+        background-color:olivedrab;
+        color:white;
+    }
+    .main-comment{
+        width: 1200px;
+        height:auto;
+        margin-left:40px;
+        position: relative;
+        bottom: 30px;
+    }
+    .main-comment li{
+        width: 90%;
+        border-top: 1px solid rgba(128, 128, 128, 0.219);
+        margin-top:10px;
+    }
+    #formComment{
+        width: 1200px;
+        height:300px;
+       
+        display:flex;
+        flex-direction: column;
+        margin-left:40px;
+        justify-content: space-around;
+    }
+    #formComment input{
+        width: 93%;
+        height:40px;
+        outline: none;
+        padding-left: 20px;
+        border: 1px solid rgba(128, 128, 128, 0.219);
+    }
+</style>
+<div class="details-view-more">
+    <ul>
+        <li class="item-view-1">Description</li>
+        <li class="item-view-2">Reviews</li>
+        <li class="item-view-3">Brand</li>
+    </ul>
+</div>
+<div class="main-view-more">
+    <ul class="main-view-description">
+        <li class="Description-item">
+            The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display
+            provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there’s no limit to what you can achieve.
+        </li>
+        <li class="Description-item">The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it’s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.</li>
+        <li class="Description-item">Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple’s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.</li>
+    </ul>
+    <div class="main-view-review">
+        <div class="review-header">
+            <div class="d-star">
+                <span><span class="span-rate">4.25 <i class="far fa-star"></i></span>  Rating</span>
+                <ul class="details-star">
+                    <li>5 <i class="far fa-star"></i><div class="details-hr"></div>  <span>0</span> </li>
+                    <li>4 <i class="far fa-star"></i><div class="details-hr"></div>  <span>0</span></li>
+                    <li>3 <i class="far fa-star"></i><div class="details-hr"></div>  <span>0</span></li>
+                    <li>2 <i class="far fa-star"></i><div class="details-hr"></div>  <span>0</span></li>
+                    <li>1 <i class="far fa-star"></i><div class="details-hr"></div>  <span>0</span></li>
+                </ul>
+            </div>
+            <div>
+                <span class="review-all-in">Reviews for "<?php echo $ProductN ?>"</span><br>
+                <span>There are no reviews yet.</span>
+            </div>
+        </div> 
+        <ul class="main-comment">
+            <h2 style="color:red">Review*</h2>
+            
+            <li>
+              <span></span></br>
+              <span style=" font-size: 18px;
+               font-weight: bold;"></span></br>
+              <span style="color:gray"></span></br>  
+            </li>
+
+        </ul>
+
+        <span class="info-d d-first">Be the first to review “”</span><br>
+        <span class="info-d">Your phone will not be published. Required fields are marked *</span>  
+        <form id="formComment" method="POST">
+            <input type="text" name="name" placeholder="Your name">
+            <input type="text" name="phone" placeholder="Your phone">
+            <input type="text" name="comment" placeholder="Your comment">
+            <input id="sendComment" type="submit" name="submit" value="Comment Now">
+        </form> 
+    </div>
+</div>
+
+
+
+{% endblock  %}

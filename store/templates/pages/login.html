@@ -1,0 +1,33 @@
+{%extends 'pages/base.html' %}
+
+
+{% block content  %}
+
+<div class="user-login">
+    <div class="container-login">
+        <h1 class="tiltle-login">Login</h1>
+        <div class=" login">         
+              <form class="form-login"  action=""  method="post">
+                {% csrf_token %}
+                <div class="review-login">
+                  <label for="uname"><b>Username</b></label>
+                  <input type="text" placeholder="Enter Username" name="username" required>
+              
+                  <label for="psw"><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" name="password" required>
+                      
+                  <div class="">
+                      <a style="color:red" href= "/mywebsite/register.php">Do not have an account ?</a></br>
+                      <button style="width:200px;height:45px;cursor:pointer;background-color:blue;color:white;outline:none;border:none;border-radius:5px" name="submit" type="submit">LOGIN</button>
+                      <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                      </label>
+                  </div>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock  %}

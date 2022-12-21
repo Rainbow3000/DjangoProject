@@ -1,0 +1,120 @@
+{%extends 'pages/base.html' %} {% block content %}
+<style>
+  #Cart td {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.478);
+  }
+  #Cart {
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+  }
+</style>
+
+<div
+  style="
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+  "
+>
+  <div  style="width: 100%; text-align: center; margin-top: 20px; height: auto">
+    <h1
+      style="
+        width: 1200px;
+        height: auto;
+        margin: 0 auto;
+        background-color: gray;
+        color: white;
+      "
+    >
+      Your Cart
+    </h1>
+    <table style="width: 100%; text-align: center">
+      {% if cart%} {% for item in cart %}  
+      <form  style="width: 100%" id="Cart" action="" method="POST">
+        {% csrf_token %}   
+        <tr class="cart-container">
+          <td>
+            <img
+            width="180px"
+            height="180px"
+            src="/store/static/{{ item.product.product_image}}"
+            class="attachment-168x202 size-168x202 wp-post-image"
+              alt=""
+              loading="lazy"
+              />
+            </td>
+            <td><span class="cartItemName">{{item.product.name}}</span></td>
+            <td>${{item.product.selling_price}}</td>
+            <td>
+              <span style="margin-bottom: 55px" class="info-add-cart">
+                <div
+                style="width: 100px; margin-bottom: 120px"
+                class="quantity-info"
+                >
+                <span class="cart-des">-</span
+                  ><span class="prod_qty" id="cart-quantity"
+                  >{{item.product_qty}}</span
+                ><span class="cart-inc">+</span>
+              </div>
+            </span>
+          </td>
+          <td>
+            <input type="hidden" value="{{item.id}}" class="cart_id" />
+            <input type="hidden" value="{{item.product_qty}}" class="cart_qty" />
+          </td>
+          <td>
+              <button class="del-btn" type="submit" name="submit" style="width:120px;height:40px;background-color:orangered;color:white;cursor:pointer;border:none;border-radius:5px">DEL</button>
+          </td>
+        </tr>
+      </form>
+        {% endfor %} 
+        {% else %}
+          <h3 style="margin-top:100px">Cart is empty !</h3>
+        {% endif %}
+      </table>
+  </div>
+  <div style="width: 1px; height: 500px; background-color: white"></div>
+</div>
+<h2
+  style="
+    position: relative;
+    left: 1300px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  "
+>
+  Total: $<span>{{totalPrice}}</span>
+</h2>
+
+<div
+  style="
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  "
+>
+  <div class="cartOptions">
+    <i class="fas fa-angle-double-left"></i>
+    <div class="gotoshop">
+      <span><a href="http://localhost:8888/">GO TO SHOP</a></span>
+    </div>
+  </div>
+
+  <div style="margin-left: 700px" class="cartOptions">
+    <div class="gotoshop">
+      <span
+        ><a href="http://localhost:8888/checkout"
+          >CHECK OUT</a
+        ></span
+      >
+    </div>
+  </div>
+</div>
+
+{% endblock %}
